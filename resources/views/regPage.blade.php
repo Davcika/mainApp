@@ -9,20 +9,25 @@
 <body>
 <div id="pageWrapper">
     @auth
+
     <div id="authContainer">
         <div id="logout">
+
             <form action="/logout" method="POST">
                 @csrf
                 <button>Logout</button>
             </form>
+
             @if ($user['karma'] < 0)
                 <h3 style="color: brown">karma {{$user['karma']}}</h3>
             @else
                 <h3 style="color: rgb(23, 93, 70)">karma {{$user['karma']}}</h3>
             @endif
         </div>
+
         <div id="paperPost">
             <h2>Create Post</h2>
+
             <form action="/create-post" method="POST" id="postForm">
                 @csrf
                 <input type="text" name="title" placeholder="post title" class="postInput">
@@ -35,19 +40,35 @@
                 @foreach ($posts as $post)
                 <div class="singlePost">
                     <h3>{{ $post['title'] }}</h3>
-                    <h5 style="color: blue">{{ $post->user->name }}</h5>
+                    <a style="color: blue" href="/profile/{{ $post->user->id }}">{{ $post->user->name }}</a>
                     <p>{{ $post['body'] }}</p>
-                    <p style="color: brown">{{ $post['likes'] }}</p>
+                    @if($post->answer)
+                    <h3>Atbildeja: {{ $post->answer->user->name }}</h3>
+                    <p>{{ $post->answer->body }}</p>
+                    @endif
+                    <span>🫀 ⬅ <span style="color: brown; font-weight: bold; font-size: 1rem; font-family: 'Roboto Mono', monospace;">({{ $post['likes'] }})</span></span>
+                    @if(!$post->answer)
+                    <p><a href="/answer-post/{{ $post->id }}">Answer post</a></p>
+                    @endif
+
                     <form action="/like" method="POST">
                         @csrf
                         <input type="hidden" name="post_id" value="{{ $post->id }}">
                         <button style="color: rgb(23, 93, 70)">Like</button>
                     </form>
+
                     <form action="/dislike" method="POST">
                     @csrf
                     <input type="hidden" name="post_id" value="{{ $post->id }}">
                     <button style="color: brown">Dislike</button>
                     </form>
+                    @if($post->user->id == Auth::id())
+                    <form action="/delete-post/{{ $post->id }}" method="POST">
+                        @csrf
+                        @method ('DELETE')
+                        <button>Delete post</button>
+                    </form>
+                    @endif
                 </div>
                 @endforeach
             </div>
@@ -57,6 +78,7 @@
         @else
         <h1 id="title">Quick Q&A</h1>
         <div id="register">
+
             <form action="/register" method="POST">
                 <h2>Register</h2>
                 @csrf
@@ -65,6 +87,7 @@
                 <input type="password" name="password" placeholder="password" class="regItem">
                 <button>Register</button>
             </form>
+
             <form action="/login" method="POST">
                 <h2>Login</h2>
                 @csrf
@@ -72,6 +95,7 @@
                 <input type="password" name="loginpassword" placeholder="password" class="loginItem">
                 <button>Login</button>
             </form>
+
         </div>
         @endauth
 </div>

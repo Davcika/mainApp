@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -9,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    public function answerPage(Post $post){
+        return view('answerPage', ['post' => $post]);
+    }
+
     public function dislikePost(Request $request){
         $postId = $request->input('post_id');
         if(Post::where('id', $postId)->exists()){

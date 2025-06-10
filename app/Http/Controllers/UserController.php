@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function profile(User $user){
+        return view('profilePage', ['user' => $user]);
+    }
+
     public function login(Request $request){
         $fields = $request->validate([
             'loginname' => 'required',
