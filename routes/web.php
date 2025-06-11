@@ -1,25 +1,26 @@
 <?php
 
 use App\Models\Post;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Answer;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnswerController;
-use App\Models\Answer;
+
 
 Route::get('/', function () {
     $user_posts = [];
     $allposts = Post::all();
     $answers = Answer::all();
     $user = auth()->user();
-    if(Auth::check()){
-        $user_posts = auth()->user()->posts()->get();
-        foreach($user_posts as $user_post){
-            $user['karma'] += $user_post['likes'];
-        }
+    if($user){
+        $karma = $user->posts()->withCount('likes')->get()->sum('likes_count') + $user->answer()->withCount('likes')->get()->sum('likes_count');
+    }else{
+        $karma = 0;
     }
-    return view('regPage', ['posts' => $allposts, 'user' => $user, 'answer' => $answers]);
+    return view('regPage', ['posts' => $allposts, 'user' => $user, 'answer' => $answers, 'karma' => $karma]);
+
 });
 
 //user routes
@@ -30,8 +31,11 @@ Route::get('/profile/{user}', [UserController::class, 'profile']);
 
 //post routes
 Route::post('/create-post', [PostController::class, 'createPost']);
-Route::post('/like', [PostController::class, 'likePost']);
+Route::get('/edit-post/{post}', [PostController::class, 'showEditPost']);
+Route::put('/edit-post/{post}', [PostController::class, 'editPost']);
+Route::post('/like', [LikeController::class, 'likePost']);
 Route::post('/dislike', [PostController::class, 'dislikePost']);
+Route::delete('/delete-post/{post}', [PostController::class, 'deletePost']);
 
 //answer routes
 Route::get('/answer-post/{post}', [PostController::class, 'answerPage']);

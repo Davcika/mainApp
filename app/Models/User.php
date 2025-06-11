@@ -47,10 +47,14 @@ class User extends Authenticatable
     }
 
     public function posts(){
-        return $this->hasMany(Post::class, 'user_id');
+        return $this->hasMany(Post::class);
     }
 
     public function answer(){
-        return $this->hasMany(Answer::class, 'user_id');
+        return $this->hasMany(Answer::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
     }
 }
