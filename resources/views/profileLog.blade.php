@@ -6,6 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Profile page</h1>
+    @foreach($user->posts as $post)
+    <div style="border: 5px">
+        <p>{{ $post->created_at }}</p>
+        <p>{{ $post->title }}</p>
+        <p>{{ $post->body }}</p>
+    </div>
+    @endforeach
 </body>
 </html>

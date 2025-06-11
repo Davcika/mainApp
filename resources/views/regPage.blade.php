@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/regStyle.css') }}">
 </head>
 <body>
-<div id="pageWrapper">
+<div id="page">
     @auth {{--Viss ko redzēs ielogojies/registrejies lietotajs--}}
     <div id="authContainer">
         {{--Iespeja atvienoties no sesijas--}}
@@ -16,6 +16,7 @@
                 @csrf
                 <button>Logout</button>
             </form>
+                <h3>User: <a href="/profile-page/{{ $user->id }}">{{ $user->name }}</a></h3>
                 <h3 style="color: rgb(23, 93, 70)">karma {{ $karma }}</h3>
         </div>
 

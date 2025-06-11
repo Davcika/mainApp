@@ -27,7 +27,8 @@ Route::get('/', function () {
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
-Route::get('/profile/{user}', [UserController::class, 'profile']);
+Route::get('/profile/{user}', [UserController::class, 'profileLog']);
+Route::get('/profile-page/{user}', [UserController::class, 'profilePage']);
 
 //post routes
 Route::post('/create-post', [PostController::class, 'createPost']);
@@ -36,6 +37,7 @@ Route::put('/edit-post/{post}', [PostController::class, 'editPost']);
 Route::post('/like', [LikeController::class, 'likePost']);
 Route::post('/dislike', [PostController::class, 'dislikePost']);
 Route::delete('/delete-post/{post}', [PostController::class, 'deletePost']);
+
 
 //answer routes
 Route::get('/answer-post/{post}', [PostController::class, 'answerPage']);

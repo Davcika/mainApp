@@ -9,8 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function profile(User $user){
+    public function profilePage(User $user){
         return view('profilePage', ['user' => $user]);
+    }
+
+    public function profileLog(User $user){
+        return view('profileLog', ['user' => $user]);
     }
 
     public function login(Request $request){
