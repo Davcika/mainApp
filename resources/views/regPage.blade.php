@@ -47,10 +47,11 @@
                     <p>{{ $post->answer->body }}</p>
                     @endif
                     <span>🫀 ⬅ <span style="color: brown; font-weight: bold; font-size: 1rem; font-family: 'Roboto Mono', monospace;">({{ $post['likes'] }})</span></span>
-                    @if(!$post->answer)
+                    @if(!$post->answer && $post->user->id !== Auth::id())
                     <p><a href="/answer-post/{{ $post->id }}">Answer post</a></p>
                     @endif
-
+                    
+                    @if($post->answer)
                     <form action="/like" method="POST">
                         @csrf
                         <input type="hidden" name="post_id" value="{{ $post->id }}">
@@ -62,6 +63,8 @@
                     <input type="hidden" name="post_id" value="{{ $post->id }}">
                     <button style="color: brown">Dislike</button>
                     </form>
+                    @endif
+
                     @if($post->user->id == Auth::id())
                     <form action="/delete-post/{{ $post->id }}" method="POST">
                         @csrf
