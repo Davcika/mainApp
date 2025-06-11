@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'background',
     ];
 
     /**
@@ -50,11 +51,19 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function answer(){
+    public function answers(){
         return $this->hasMany(Answer::class);
     }
 
     public function likes(){
         return $this->hasMany(Like::class);
+    }
+
+    public function karma()
+    {
+        $postLikes = $this->posts()->withCount('likes')->get()->sum('likes_count');
+        $answerLikes = $this->answers()->withCount('likes')->get()->sum('likes_count');
+
+        return $postLikes + $answerLikes;
     }
 }

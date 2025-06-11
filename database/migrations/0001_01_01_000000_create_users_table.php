@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('karma')->default(0);
+            $table->string('background')->default('none');
             $table->rememberToken();
             $table->timestamps();
         });

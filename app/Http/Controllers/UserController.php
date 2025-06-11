@@ -9,8 +9,27 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function exit(){
+        return redirect('/');
+    }
+
+    public function setBackground(Request $request){
+        $fields = $request->validate([
+            'background' => 'required'
+        ]);
+
+        $fields['background'] = strip_tags($fields['background']);
+
+        $user = Auth::user();
+
+        $user->background = $fields['background'];
+        $user->save();
+
+        return redirect()->back();
+    }
+
     public function profilePage(User $user){
-        return view('profilePage', ['user' => $user]);
+        return view('profilePage', ['user' => $user, 'karma' => $user->karma()]);
     }
 
     public function profileLog(User $user){

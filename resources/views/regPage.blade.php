@@ -17,7 +17,7 @@
                 <button>Logout</button>
             </form>
                 <h3>User: <a href="/profile-page/{{ $user->id }}">{{ $user->name }}</a></h3>
-                <h3 style="color: rgb(23, 93, 70)">karma {{ $karma }}</h3>
+                <h3 style="color: brown">🫀 {{ $user->karma() }}</h3>
         </div>
 
         {{--Viss kas saistits ar postu--}}
