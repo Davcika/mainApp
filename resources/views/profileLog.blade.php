@@ -7,7 +7,7 @@
 </head>
 <body>
     @foreach($user->posts as $post)
-    <div style="border: 5px">
+    <div style="border-style: dashed; border-width: 5px;">
         <p>{{ $post->created_at }}</p>
         <p>{{ $post->title }}</p>
         <p>{{ $post->body }}</p>

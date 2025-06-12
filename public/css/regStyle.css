@@ -25,7 +25,6 @@ body {
     text-align: center;
 }
 
-/* Container for Register/Login forms */
 #register {
     display: flex;
     gap: 5rem;
@@ -74,7 +73,6 @@ input::placeholder {
     color: #aaa;
 }
 
-/* Button style */
 button {
     padding: 0.75rem 1.25rem;
     background-color: #2c2c2c;
@@ -92,7 +90,6 @@ button:hover {
     cursor: pointer;
 }
 
-/* Authenticated area */
 #authContainer {
     width: 100%;
     max-width: 800px;
@@ -105,7 +102,6 @@ button:hover {
     margin-top: 2rem;
 }
 
-/* Logout + karma */
 #logout {
     display: flex;
     justify-content: space-between;
@@ -118,7 +114,6 @@ button:hover {
     font-weight: bold;
 }
 
-/* Post creation */
 #paperPost > h2 {
     margin-bottom: 1rem;
 }
@@ -150,14 +145,12 @@ button:hover {
     align-self: flex-start;
 }
 
-/* Compact posts container */
 #postsContainer {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
 }
 
-/* More compact post card */
 .singlePost {
     background-color: #f4f8f7;
     border: 1px solid #d8e0df;
@@ -170,41 +163,35 @@ button:hover {
     font-size: 0.95rem;
 }
 
-/* Title */
 .singlePost h3 {
     color: #1b3f3a;
     font-size: 1.1rem;
     margin: 0;
 }
 
-/* Author */
 .singlePost h5 {
     color: #34786e;
     font-size: 0.85rem;
     margin: -0.25rem 0 0.25rem;
 }
 
-/* Post content */
 .singlePost p {
     color: #444;
     line-height: 1.4;
     margin: 0.25rem 0;
 }
 
-/* Answered by */
 .singlePost h3 + p {
     margin-top: 0.25rem;
     font-style: italic;
     color: #2e5c56;
 }
 
-/* Karma / Likes */
 .singlePost p[style*="color: brown"] {
     font-size: 0.85rem;
     color: #854d0e !important;
 }
 
-/* Answer post link */
 .singlePost a {
     color: #2e7d6f;
     font-weight: 500;
@@ -212,7 +199,6 @@ button:hover {
     font-size: 0.9rem;
 }
 
-/* Group like/dislike/delete buttons more subtly */
 .singlePost .like-group {
     display: flex;
     flex-wrap: wrap;
@@ -220,7 +206,6 @@ button:hover {
     margin-top: 0.5rem;
 }
 
-/* Subtle button style */
 .singlePost form button {
     background-color: #e0f0ec;
     color: #245e56;
@@ -236,7 +221,6 @@ button:hover {
     cursor: pointer;
 }
 
-/* Delete button */
 .singlePost form:last-of-type button {
     background-color: #fce8e8;
     color: #992020;
